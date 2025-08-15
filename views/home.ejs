@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>電卓</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+    <h1>計算機</h1>
+    <form id="calcForm" action="/calculate" method="post" autocomplete="off" onsubmit="return beforeSubmit();">
+        <input id="display" type="text" name="expression" placeholder="計算式" readonly aria-label="計算式" value="<%= typeof number !== 'undefined' ? number : '' %>">
+        <br>
+        <div>
+            <button type="button" class="calc-btn" onclick="addChar('7')">7</button>
+            <button type="button" class="calc-btn" onclick="addChar('8')">8</button>
+            <button type="button" class="calc-btn" onclick="addChar('9')">9</button>
+            <button type="button" class="calc-btn" onclick="addChar('/')">÷</button>
+        </div>
+        <div>
+            <button type="button" class="calc-btn" onclick="addChar('4')">4</button>
+            <button type="button" class="calc-btn" onclick="addChar('5')">5</button>
+            <button type="button" class="calc-btn" onclick="addChar('6')">6</button>
+            <button type="button" class="calc-btn" onclick="addChar('*')">×</button>
+        </div>
+        <div>
+            <button type="button" class="calc-btn" onclick="addChar('1')">1</button>
+            <button type="button" class="calc-btn" onclick="addChar('2')">2</button>
+            <button type="button" class="calc-btn" onclick="addChar('3')">3</button>
+            <button type="button" class="calc-btn" onclick="addChar('-')">−</button>
+        </div>
+        <div>
+            <button type="button" class="calc-btn" onclick="addChar('0')">0</button>
+            <button type="button" class="calc-btn" onclick="addChar('.')">.</button>
+            <button type="button" class="calc-btn" onclick="clearDisplay()">C</button>
+            <button type="button" class="calc-btn" onclick="addChar('+')">＋</button>
+        </div>
+        <div>
+            <button type="submit" class="calc-btn" style="width: 170px;">=</button>
+        </div>
+
+        <% if (number !== undefined || error) { %>
+            <div class="result">
+                <% if (number !== undefined) { %>計算結果: <%= number %><% } %>
+                <% if (error) { %><span class="error"><%= error %></span><% } %>
+            </div>
+        <% } %>
+
+    </form>
+    <script>
+        function addChar(char) {
+            // ÷ボタンの場合は÷を表示
+            if (char === '/' ) {
+                document.getElementById('display').value += '÷';
+            } 
+            if (char === '*') {
+                // ×ボタンの場合は×を表示
+                document.getElementById('display').value += '×';
+            } 
+            if (char !== '/' && char !== '*') {
+                document.getElementById('display').value += char;
+            }
+        }
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        function beforeSubmit() {
+            // 送信前に÷を/に置換
+            const display = document.getElementById('display');
+            display.value = display.value.replace(/÷/g, '/');
+            // ×も*に変換したい場合は下記も追加
+            display.value = display.value.replace(/×/g, '*');
+            return true;
+        }
+    </script>
+</body>
+</html>

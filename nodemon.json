@@ -1,0 +1,5 @@
+{
+  "watch": ["app.ts", "views/", "public/"],
+  "ext": "ts,ejs,css,js",
+  "exec": "ts-node app.ts"
+}

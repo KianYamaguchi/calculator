@@ -1,0 +1,70 @@
+body {
+    background: #f0f4f8;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-top: 40px;
+    color: #333;
+    letter-spacing: 0.1em;
+}
+
+#calcForm {
+    background: #fff;
+    padding: 32px 24px 24px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    margin-top: 24px;
+    display: inline-block;
+}
+
+#display {
+    width: 220px;
+    height: 48px;
+    font-size: 2rem;
+    margin-bottom: 16px;
+    text-align: right;
+    border: none;
+    border-radius: 8px;
+    background: #f7fafc;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    padding: 0 12px;
+    color: #222;
+}
+
+.calc-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+    margin: 4px;
+    border: none;
+    border-radius: 8px;
+    background: #e2e8f0;
+    color: #333;
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.calc-btn:active {
+    background: #cbd5e1;
+}
+
+.calc-btn:last-child {
+    background: #38bdf8;
+    color: #fff;
+}
+
+.calc-btn:last-child:active {
+    background: #0ea5e9;
+}
+
+#calcForm div {
+    display: flex;
+    justify-content: center;
+}
