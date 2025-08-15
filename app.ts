@@ -49,22 +49,6 @@ app.get('/home', requireLogin, (req, res) => {
     });
 });
 
-app.post('/calculate', requireLogin, (req, res) => {
-    const expression = req.body.expression;
-    let number;
-    let error;
-    try {
-        number = evaluate(expression);
-    } catch (e) {
-        console.error(e);
-        error = "無効な計算式です";
-    }
-    res.render('home', {
-        session: req.session,
-        number,
-        error
-    });
-});
 
 app.get('/register', (req, res) =>  {
     res.render("register")

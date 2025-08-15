@@ -17,8 +17,8 @@
             <button type="button" class="logout-btn" onclick="location.href='/logout'">Logout</button>
         </div>
     </div>
-    <form id="calcForm" action="/calculate" method="post" autocomplete="off" onsubmit="return beforeSubmit();">
-        <input id="display" type="text" name="expression" placeholder="計算式" readonly aria-label="計算式" value="<%= typeof number !== 'undefined' ? number : '' %>">
+    <form id="calcForm" autocomplete="off" onsubmit="return calculateResult();">
+        <input id="display" type="text" name="expression" placeholder="計算式" readonly aria-label="計算式">
         <br>
         <div>
             <button type="button" class="calc-btn" onclick="addChar('7')">7</button>
@@ -47,39 +47,34 @@
         <div>
             <button type="submit" class="calc-btn" style="width: 170px;">=</button>
         </div>
-
-        <% if (number !== undefined || error) { %>
-            <div class="result">
-                <% if (number !== undefined) { %>計算結果: <%= number %><% } %>
-                <% if (error) { %><span class="error"><%= error %></span><% } %>
-            </div>
-        <% } %>
-
+        <div id="result" class="result"></div>
     </form>
     <script>
         function addChar(char) {
-            // ÷ボタンの場合は÷を表示
             if (char === '/' ) {
                 document.getElementById('display').value += '÷';
-            } 
-            if (char === '*') {
-                // ×ボタンの場合は×を表示
+            } else if (char === '*') {
                 document.getElementById('display').value += '×';
-            } 
-            if (char !== '/' && char !== '*') {
+            } else {
                 document.getElementById('display').value += char;
             }
         }
         function clearDisplay() {
             document.getElementById('display').value = '';
+            document.getElementById('result').textContent = '';
         }
-        function beforeSubmit() {
-            // 送信前に÷を/に置換
+        function calculateResult() {
             const display = document.getElementById('display');
-            display.value = display.value.replace(/÷/g, '/');
-            // ×も*に変換したい場合は下記も追加
-            display.value = display.value.replace(/×/g, '*');
-            return true;
+            let expr = display.value.replace(/÷/g, '/').replace(/×/g, '*');
+            try {
+                // evalは安全ではないので、実運用ではmath.jsなど推奨
+                let result = eval(expr);
+                document.getElementById('result').textContent = '計算結果: ' + result;
+                display.value = result; // 結果を表示欄にセット
+            } catch (e) {
+                document.getElementById('result').textContent = '無効な計算式です';
+            }
+            return false; // フォーム送信をキャンセル
         }
     </script>
 </body>
