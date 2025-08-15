@@ -6,6 +6,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding-top: 56px; /* ヘッダーの高さ+余白分 */
 }
 
 h1 {
@@ -67,4 +68,67 @@ h1 {
 #calcForm div {
     display: flex;
     justify-content: center;
+}
+
+/* ログイン情報とログアウトボタンの配置 */
+.header-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 48px;
+    background: #2563eb;
+    color: #fff;
+    display: flex;
+    justify-content: flex-start; /* 左寄せに変更 */
+    align-items: center;
+    padding: 0 32px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* ユーザー名とボタンの間隔 */
+}
+
+.user-info {
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.user-info i {
+    margin-right: 6px;
+    color: #fff;
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+.logout-btn {
+    background: #f87171;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.logout-btn:hover {
+    background: #ef4444;
+}
+
+.result {
+    margin-top: 16px;
+    font-size: 1.2rem;
+    color: #2563eb;
+    text-align: center;
+}
+
+.error {
+    color: #ef4444;
+    margin-left: 8px;
+    font-size: 1rem;
 }
